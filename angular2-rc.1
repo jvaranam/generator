@@ -7,17 +7,22 @@ echo
 (echo {"ambientDependencies":{"core-js":"registry:dt/core-js#0.0.0+20160317120654","jasmine":"registry:dt/jasmine#2.2.0+20160412134438","node":"registry:dt/node#4.0.0+20160509154515"}})>typings.json
 echo *****typings.json file added***** 
 echo
-(echo {"name":%1,"version":"1.0.0","scripts":{"start":"tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",    "tsc":"tsc","tsc:w":"tsc -w","lite":"lite-server","typings":"typings","postinstall":"typings install"},"license":"ISC","dependencies":{"@angular/common":"2.0.0-rc.1","@angular/compiler":"2.0.0-rc.1","@angular/core":"2.0.0-rc.1","@angular/http":"2.0.0-rc.1","@angular/platform-browser":"2.0.0-rc.1","@angular/platform-browser-dynamic":"2.0.0-rc.1","@angular/router":"2.0.0-rc.1","@angular/router-deprecated":"2.0.0-rc.1","@angular/upgrade":"2.0.0-rc.1","systemjs":"0.19.27","core-js": "^2.4.0","reflect-metadata":"^0.1.3","rxjs":"5.0.0-beta.6","zone.js":"^0.6.12"},"devDependencies":{"concurrently":"^2.0.0","lite-server":"^2.2.0","typescript":"^1.8.10","typings":"^0.8.1"}})>package.json
+(echo {"name":"angular2-quickstart","version":"1.0.0","scripts":{"start":"tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",    "tsc":"tsc","tsc:w":"tsc -w","lite":"lite-server","typings":"typings","postinstall":"typings install"},"license":"ISC","dependencies":{"@angular/common":"2.0.0-rc.1","@angular/compiler":"2.0.0-rc.1","@angular/core":"2.0.0-rc.1","@angular/http":"2.0.0-rc.1","@angular/platform-browser":"2.0.0-rc.1","@angular/platform-browser-dynamic":"2.0.0-rc.1","@angular/router":"2.0.0-rc.1","@angular/router-deprecated":"2.0.0-rc.1","@angular/upgrade":"2.0.0-rc.1","systemjs":"0.19.27","core-js": "^2.4.0","reflect-metadata":"^0.1.3","rxjs":"5.0.0-beta.6","zone.js":"^0.6.12"},"devDependencies":{"concurrently":"^2.0.0","lite-server":"^2.2.0","typescript":"^1.8.10","typings":"^0.8.1"}})>package.json
 echo *****packages.json file added***** 
 echo
-(echo {"(function(global){var map = {'app':'app','@angular':'node_modules/@angular','angular2-in-memory-web-api':'node_modules/angular2-in-memory-web-api','rxjs':'node_modules/rxjs'}; var packages = {'app':{ main: 'main.js',  defaultExtension:'js'},'rxjs':{ defaultExtension:'js'},'angular2-in-memory-web-api':{ defaultExtension:'js'}}; var ngPackageNames = ['common','compiler','core','http','platform-browser','platform-browser-dynamic','router','router-deprecated','upgrade']; ngPackageNames.forEach(function(pkgName) { packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' }; }); var config = { map: map, packages: packages } System.config(config); })(this);"})>systemjs.config.js
+@echo (function(global){var map = {'app':'app','@angular':'node_modules/@angular','angular2-in-memory-web-api':'node_modules/angular2-in-memory-web-api','rxjs':'node_modules/rxjs'};  >systemjs.config.js
+@echo var packages = {'app':{ main: 'main.js',  defaultExtension:'js'},'rxjs':{ defaultExtension:'js'},'angular2-in-memory-web-api':{ defaultExtension:'js'}}; >>systemjs.config.js
+@echo var ngPackageNames = ['common','compiler','core','http','platform-browser','platform-browser-dynamic','router','router-deprecated','upgrade']; >>systemjs.config.js
+@echo ngPackageNames.forEach(function(pkgName) { packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' }; });>>systemjs.config.js
+@echo var config = { map: map, packages: packages } >>systemjs.config.js
+@echo System.config(config); })(this); >>systemjs.config.js
 echo *****systemjs.config.js file added***** 
 echo
 echo
 echo *****installing dependency*****
 call npm install
 mkdir app
-@echo import {Component} from 'angular2/core';>app/app.component.ts
+@echo import {Component} from '@angular/core';>app/app.component.ts
 echo.>>app/app.component.ts 
 @echo @Component({>>app/app.component.ts 
 @echo      selector: 'my-app',>>app/app.component.ts 
@@ -26,7 +31,7 @@ echo.>>app/app.component.ts
 @echo export class AppComponent { }>>app/app.component.ts 
 echo *****app/app.component.ts file added***** 
 echo 
-@echo import {bootstrap}    from 'angular2/platform/browser'; >app/main.ts
+@echo import {bootstrap}    from '@angular/platform-browser-dynamic'; >app/main.ts
 @echo import {AppComponent} from './app.component';>>app/main.ts
 echo.>>app/main.ts
 @echo bootstrap(AppComponent);>>app/main.ts
@@ -39,29 +44,14 @@ echo
 @echo    ^<link rel="stylesheet" href="styles.css"^> >>index.html
 echo.>>index.html
 @echo    ^<!-- 1. Load libraries --^> >>index.html
-@echo    ^<!-- IE required polyfills, in this exact order --^> >>index.html
-@echo    ^<script src="node_modules/es6-shim/es6-shim.min.js"^> ^</script^> >>index.html
-@echo    ^<script src="node_modules/systemjs/dist/system-polyfills.js"^> ^</script^> >>index.html
-@echo    ^<script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"^> ^</script^> >>index.html   
+@echo    ^<!-- Polyfill(s) for older browsers --^> >>index.html
+@echo    ^<script src="node_modules/core-js/client/shim.min.js"^> ^</script^> >>index.html
+@echo    ^<script src="node_modules/zone.js/dist/zone.js"^> ^</script^> >>index.html
+@echo    ^<script src="node_modules/reflect-metadata/Reflect.js"^> ^</script^> >>index.html   
+@echo    ^<script src="node_modules/systemjs/dist/system.src.js"^> ^</script^> >>index.html   
 echo.>>index.html
-@echo    ^<script src="node_modules/angular2/bundles/angular2-polyfills.js"^> ^</script^> >>index.html
-@echo    ^<script src="node_modules/systemjs/dist/system.src.js"^> ^</script^> >>index.html
-@echo    ^<script src="node_modules/rxjs/bundles/Rx.js"^> ^</script^> >>index.html
-@echo    ^<script src="node_modules/angular2/bundles/angular2.dev.js"^> ^</script^> >>index.html
-echo.>>index.html
-@echo    ^<!-- 2. Configure SystemJS --^> >>index.html
-@echo    ^<script^> >>index.html
-@echo      System.config({ >>index.html
-@echo        packages: {     >>index.html    
-@echo          app: { >>index.html
-@echo            format: 'register', >>index.html
-@echo            defaultExtension: 'js' >>index.html
-@echo          } >>index.html
-@echo        } >>index.html
-@echo      }); >>index.html
-@echo      System.import('app/main') >>index.html
-@echo            .then(null, console.error.bind(console)); >>index.html
-@echo    ^</script^> >>index.html
+@echo    ^<script src="systemjs.config.js"^> ^</script^> >>index.html
+@echo    ^<script^>  System.import('app').catch(function(err){console.error(err);}); ^</script^> >>index.html
 @echo  ^</head^> >>index.html
 echo.>>index.html
 @echo  ^<!-- 3. Display the application --^> >>index.html
@@ -77,17 +67,8 @@ echo
 @echo   font-family: Arial, Helvetica, sans-serif;  >>styles.css  
 @echo   font-size: 250%; >>styles.css
 @echo } >>styles.css
-@echo h2, h3 {  >>styles.css
-@echo   color: #444; >>styles.css
-@echo   font-family: Arial, Helvetica, sans-serif;  >>styles.css  
-@echo   font-weight: lighter; >>styles.css
-@echo } >>styles.css
 @echo body {  >>styles.css
 @echo   margin: 2em;  >>styles.css
-@echo } >>styles.css
-@echo body, input[text], button {  >>styles.css
-@echo   color: #888;  >>styles.css
-@echo   font-family: Cambria, Georgia;  >>styles.css
 @echo } >>styles.css
 echo *****styles.css file added*****
 echo
