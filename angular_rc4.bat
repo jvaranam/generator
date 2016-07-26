@@ -7,14 +7,14 @@ echo
 (echo {"globalDependencies":{"core-js":"registry:dt/core-js#0.0.0+20160602141332","jasmine":"registry:dt/jasmine#2.2.0+20160621224255","node":"registry:dt/node#6.0.0+20160621231320"}})>typings.json
 echo *****typings.json file added***** 
 echo
-(echo {"name":"angular2-quickstart","version":"1.0.0","scripts":{"start":"tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ", "lite":"lite-server","postinstall":"typings install","tsc":"tsc","tsc:w":"tsc -w","typings":"typings"},"license":"ISC","dependencies":{"@angular/common":"2.0.0-rc.4","@angular/compiler":"2.0.0-rc.4","@angular/core":"2.0.0-rc.4","@angular/forms":"0.2.0","@angular/http":"2.0.0-rc.4","@angular/platform-browser":"2.0.0-rc.4","@angular/platform-browser-dynamic":"2.0.0-rc.4","@angular/router":"3.0.0-beta.1","@angular/router-deprecated":"2.0.0-rc.2","@angular/upgrade":"2.0.0-rc.4","systemjs":"0.19.27","core-js":"^2.4.0","reflect-metadata":"^0.1.3","rxjs":"5.0.0-beta.6","zone.js":"^0.6.12","angular2-in-memory-web-api":"0.0.14","bootstrap":"^3.3.6"},"devDependencies":{"concurrently":"^2.0.0","lite-server":"^2.2.0","typescript":"^1.8.10","typings":"^1.0.4"}})>package.json
+(echo {"name":"angular2-quickstart","version":"1.0.0","scripts":{"start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ", "lite":"lite-server","postinstall":"typings install","tsc":"tsc","tsc:w":"tsc -w","typings":"typings"},"license":"ISC","dependencies":{"@angular/common":"2.0.0-rc.4","@angular/compiler":"2.0.0-rc.4","@angular/core":"2.0.0-rc.4","@angular/forms":"0.2.0","@angular/http":"2.0.0-rc.4","@angular/platform-browser":"2.0.0-rc.4","@angular/platform-browser-dynamic":"2.0.0-rc.4","@angular/router":"3.0.0-beta.1","@angular/router-deprecated":"2.0.0-rc.2","@angular/upgrade":"2.0.0-rc.4","systemjs":"0.19.27","core-js":"^2.4.0","reflect-metadata":"^0.1.3","rxjs":"5.0.0-beta.6","zone.js":"^0.6.12","angular2-in-memory-web-api":"0.0.14","bootstrap":"^3.3.6"},"devDependencies":{"concurrently":"^2.0.0","lite-server":"^2.2.0","typescript":"^1.8.10","typings":"^1.0.4"}})>package.json
 echo *****packages.json file added***** 
 echo
 @echo (function(global){var map = {'app':'app','@angular':'node_modules/@angular','angular2-in-memory-web-api':'node_modules/angular2-in-memory-web-api','rxjs':'node_modules/rxjs'};  >systemjs.config.js
 @echo var packages = {'app':{ main: 'main.js',  defaultExtension:'js'},'rxjs':{ defaultExtension:'js'},'angular2-in-memory-web-api':{ defaultExtension:'js'}}; >>systemjs.config.js
 @echo var ngPackageNames = ['common','compiler','core','http','platform-browser','platform-browser-dynamic','router','router-deprecated','upgrade']; >>systemjs.config.js
 @echo function packIndex(pkgName){packages['@angular/'+pkgName]={main:'index.js',defaultExtension:'js'};}   >>systemjs.config.js
-@echo functionpackUmd(pkgName){packages['@angular/'+pkgName]={main:'/bundles/'+pkgName+'.umd.js',defaultExtension:'js'};}   >>systemjs.config.js
+@echo function packUmd(pkgName){packages['@angular/'+pkgName]={main:'/bundles/'+pkgName+'.umd.js',defaultExtension:'js'};}   >>systemjs.config.js
 @echo var setPackageConfig=System.packageWithIndex ? packIndex : packUmd;   >>systemjs.config.js
 @echo ngPackageNames.forEach(setPackageConfig);>>systemjs.config.js
 @echo var config = { map: map, packages: packages } >>systemjs.config.js
