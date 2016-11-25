@@ -1,0 +1,105 @@
+@echo off
+mkdir %1
+chdir %1
+(echo {"compilerOptions":{"target":"es5","module":"commonjs","moduleResolution":"node","sourceMap":true,"emitDecoratorMetadata":true,"experimentalDecorators":true,"removeComments":false,"noImplicitAny":false}})>tsconfig.json
+echo *****tsconfig.json file added***** 
+echo
+(echo {"globalDependencies":{"core-js":"registry:dt/core-js#0.0.0+20160602141332","jasmine":"registry:dt/jasmine#2.2.0+20160621224255","node":"registry:dt/node#6.0.0+20160621231320"}})>typings.json
+echo *****typings.json file added***** 
+echo
+(echo {"name":"angular2-quickstart","version":"1.0.0","scripts":{"start": "tsc && concurrently \"tsc -w\" \"lite-server\" ", "lite":"lite-server","tsc":"tsc","tsc:w":"tsc -w"},"license":"MIT","dependencies":{"@angular/common":"~2.2.0","@angular/compiler":"~2.2.0","@angular/core":"~2.2.0","@angular/forms":"~2.2.0","@angular/http":"~2.2.0","@angular/platform-browser":"~2.2.0","@angular/platform-browser-dynamic":"~2.2.0","@angular/router":"~3.2.0","@angular/upgrade":"~2.2.0","@angular/material": "^2.0.0", "systemjs":"^0.19.39","core-js":"^2.4.1","reflect-metadata":"^0.1.8","rxjs":"5.0.0-beta.12","zone.js":"^0.6.25","angular-in-memory-web-api": "~0.1.15","bootstrap":"^3.3.7"},"devDependencies":{"@types/core-js":"^0.9.34","@types/node": "^6.0.45","concurrently": "^3.0.0","lite-server": "^2.2.2","typescript": "^2.0.3"}})>package.json
+echo *****packages.json file added***** 
+echo
+echo 
+@echo (function (global) {  >systemjs.config.js
+@echo   System.config({ >>systemjs.config.js
+@echo     paths: { >>systemjs.config.js
+@echo       'npm:': 'node_modules/' >>systemjs.config.js
+@echo     }, >>systemjs.config.js
+@echo     map: { >>systemjs.config.js
+@echo       app: 'app', >>systemjs.config.js
+@echo       '@angular/core': 'npm:@angular/core/bundles/core.umd.js', >>systemjs.config.js
+@echo       '@angular/common': 'npm:@angular/common/bundles/common.umd.js', >>systemjs.config.js
+@echo       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js', >>systemjs.config.js
+@echo       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js', >>systemjs.config.js
+@echo       '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js', >>systemjs.config.js
+@echo       '@angular/http': 'npm:@angular/http/bundles/http.umd.js', >>systemjs.config.js
+@echo       '@angular/router': 'npm:@angular/router/bundles/router.umd.js', >>systemjs.config.js
+@echo       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js', >>systemjs.config.js
+@echo       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js', >>systemjs.config.js
+@echo       '@angular/material': 'npm:@angular/material/material.umd.js', >>systemjs.config.js
+@echo       'rxjs':                      'npm:rxjs', >>systemjs.config.js
+@echo       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js' >>systemjs.config.js
+@echo }, >>systemjs.config.js
+@echo     packages: { >>systemjs.config.js
+@echo       app: { >>systemjs.config.js
+@echo         main: './main.js', >>systemjs.config.js
+@echo         defaultExtension: 'js' >>systemjs.config.js
+@echo       }, >>systemjs.config.js
+@echo       rxjs: { >>systemjs.config.js
+@echo         defaultExtension: 'js' >>systemjs.config.js
+@echo       } >>systemjs.config.js
+@echo     } >>systemjs.config.js
+@echo   }); >>systemjs.config.js
+@echo })(this); >>systemjs.config.js
+echo *****systemjs.config.js file added***** 
+echo
+echo
+echo *****installing dependency*****
+call npm install
+mkdir app
+echo 
+@echo import { Component } from '@angular/core'; >app/app.component.ts
+@echo @Component({ >>app/app.component.ts
+@echo   selector: 'my-app', >>app/app.component.ts
+@echo   template: '^<h1^>My First Angular 2 App^</h1^>'>>app/app.component.ts 
+@echo }) >>app/app.component.ts
+@echo export class AppComponent { } >>app/app.component.ts
+echo *****app/app.component.ts file added***** 
+echo 
+@echo import { NgModule }      from '@angular/core'; >app/app.module.ts
+@echo import { BrowserModule } from '@angular/platform-browser'; >>app/app.module.ts
+@echo import { AppComponent }   from './app.component'; >>app/app.module.ts
+@echo @NgModule({ >>app/app.module.ts
+@echo   imports:      [ BrowserModule ], >>app/app.module.ts
+@echo   declarations: [ AppComponent ], >>app/app.module.ts
+@echo   bootstrap:    [ AppComponent ] >>app/app.module.ts
+@echo }) >>app/app.module.ts
+@echo export class AppModule { } >>app/app.module.ts
+echo *****app/app.module.ts file added***** 
+echo 
+@echo import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';>app/main.ts
+@echo import { AppModule } from './app.module';>>app/main.ts
+@echo const platform = platformBrowserDynamic();>>app/main.ts
+@echo platform.bootstrapModule(AppModule);>>app/main.ts
+echo *****app/main.ts file added***** 
+echo
+@echo ^<html^> >index.html
+@echo  ^<head^> >>index.html
+@echo    ^<title^>Angular QuickStart ^</title^> >>index.html
+@echo    ^<meta name="viewport" content="width=device-width, initial-scale=1"^>  >>index.html  
+@echo    ^<link rel="stylesheet" href="styles.css"^> >>index.html
+echo.>>index.html
+@echo    ^<!-- 1. Load libraries --^> >>index.html
+@echo    ^<!-- Polyfill(s) for older browsers --^> >>index.html
+@echo    ^<script src="node_modules/core-js/client/shim.min.js"^> ^</script^> >>index.html
+@echo    ^<script src="node_modules/zone.js/dist/zone.js"^> ^</script^> >>index.html
+@echo    ^<script src="node_modules/reflect-metadata/Reflect.js"^> ^</script^> >>index.html   
+@echo    ^<script src="node_modules/systemjs/dist/system.src.js"^> ^</script^> >>index.html   
+echo.>>index.html
+@echo    ^<script src="systemjs.config.js"^> ^</script^> >>index.html
+@echo    ^<script^>  System.import('app').catch(function(err){console.error(err);}); ^</script^> >>index.html
+@echo  ^</head^> >>index.html
+echo.>>index.html
+@echo  ^<!-- 3. Display the application --^> >>index.html
+@echo  ^<body^> >>index.html
+@echo    ^<my-app^>Loading...^</my-app^> >>index.html
+@echo  ^</body^> >>index.html
+@echo  ^</html^>  >>index.html
+echo *****index.html file added*****
+echo
+@echo h1 {color: #369; font-family: Arial, Helvetica, sans-serif; font-size: 250%; } h2, h3 {color: #444; font-family: Arial, Helvetica, sans-serif; font-weight: lighter; } body {margin: 2em; }  >styles.css
+echo *****styles.css file added*****
+echo
+echo *****starting your application*****
+call npm run start
