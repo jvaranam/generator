@@ -79,6 +79,7 @@ echo
 @echo    ^<title^>Angular QuickStart ^</title^> >>index.html
 @echo    ^<meta name="viewport" content="width=device-width, initial-scale=1"^>  >>index.html  
 @echo    ^<link rel="stylesheet" href="styles.css"^> >>index.html
+@echo    ^<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"^> >>index.html
 echo.>>index.html
 @echo    ^<!-- 1. Load libraries --^> >>index.html
 @echo    ^<!-- Polyfill(s) for older browsers --^> >>index.html
